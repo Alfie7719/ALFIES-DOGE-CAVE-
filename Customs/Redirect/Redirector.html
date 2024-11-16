@@ -1,1 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting...</title>
+    <link rel="stylesheet" href="a.css">
+</head>
+<body>
+    <div class="x">
+        <h1>Redirecting in <span id="y">3</span>...</h1>
+        <p>We are redirecting you to the specified page. Please wait...</p>
+    </div>
+    <script>
+        fetch('w.json').then(r=>r.json()).then(d=>{const e=d.links,t=e[Math.floor(Math.random()*e.length)];let n=3,o=document.getElementById('y');const i=setInterval(()=>{o.textContent=n--;if(n<0){clearInterval(i);window.location.href=t}},1e3)}).catch(a=>console.log('Error loading the whitelist:',a));
+    </script>
+</body>
+</html>
 
