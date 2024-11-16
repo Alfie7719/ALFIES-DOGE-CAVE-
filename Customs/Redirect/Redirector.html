@@ -12,8 +12,33 @@
         <p>We are redirecting you to the specified page. Please wait...</p>
     </div>
     <script>
-        fetch('w.json').then(r=>r.json()).then(d=>{const e=d.links,t=e[Math.floor(Math.random()*e.length)];let n=3,o=document.getElementById('y');const i=setInterval(()=>{o.textContent=n--;if(n<0){clearInterval(i);window.location.href=t}},1e3)}).catch(a=>console.log('Error loading the whitelist:',a));
+        const params = new URLSearchParams(window.location.search);
+        const linkFromURL = params.get('Redirect');
+        
+        if (linkFromURL) {
+            let n = 3;
+            const o = document.getElementById('y');
+            const i = setInterval(() => {
+                o.textContent = n--;
+                if (n < 0) {
+                    clearInterval(i);
+                    window.location.href = linkFromURL;
+                }
+            }, 1000);
+        } else {
+            fetch('w.json').then(r => r.json()).then(d => {
+                const t = d.links[0];
+                let n = 3;
+                const o = document.getElementById('y');
+                const i = setInterval(() => {
+                    o.textContent = n--;
+                    if (n < 0) {
+                        clearInterval(i);
+                        window.location.href = t;
+                    }
+                }, 1000);
+            }).catch(a => console.log('Error loading the whitelist:', a));
+        }
     </script>
 </body>
 </html>
-
